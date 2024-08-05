@@ -38,40 +38,36 @@ Example command to run this script: `python train_slimevolley.py --gpu-id=0`
 This script is based on NEAT algorithm and a new compatible MLP policy.
 """
 
+
+import shutil
 import argparse
 import os
-import shutil
 import jax
+import jax.numpy as jnp
+from jax import random
 
 from evojax.task.slimevolley import SlimeVolley
-from evojax.policy.mlp_neat import NEATCompatibleMLPPolicy
-from evojax.algo import CMA
+from evojax.policy.mlp import MLPPolicy
+from evojax.algo.neat import NEAT
 from evojax import Trainer
 from evojax import util
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--pop-size', type=int, default=100, help='NEAT population size.')
-    parser.add_argument(
-        '--hidden-size', type=int, default=20, help='Policy hidden size.')
-    parser.add_argument(
-        '--num-generations', type=int, default=100, help='Number of generations to evolve.')
+    parser.add_argument('--pop-size', type=int, default=128, help='Population size.')
+    parser.add_argument('--hidden-size', type=int, default=20, help='Policy hidden size.')
+    parser.add_argument('--num-tests', type=int, default=100, help='Number of test rollouts.')
+    parser.add_argument('--n-repeats', type=int, default=16, help='Training repetitions.')
+    parser.add_argument('--max-iter', type=int, default=1000, help='Max training iterations.')
+    parser.add_argument('--test-interval', type=int, default=50, help='Test interval.')
+    parser.add_argument('--log-interval', type=int, default=10, help='Logging interval.')
+    parser.add_argument('--seed', type=int, default=42, help='Random seed for training.')
+    parser.add_argument('--init-std', type=float, default=0.1, help='Initial std.')
     parser.add_argument('--mutation-rate', type=float, default=0.05, help='Mutation rate for NEAT.')
-    parser.add_argument('--mutation-std', type=float, default=0.1, help='Mutation standard deviation for NEAT.')
-    parser.add_argument('--seed', type=int, default=123, help='Random seed for training.')
-    parser.add_argument(
-        '--test-interval', type=int, default=50, help='Test interval.')
-    parser.add_argument(
-        '--log-interval', type=int, default=10, help='Logging interval.')
-
-    parser.add_argument(
-        '--init-std', type=float, default=0.5, help='Initial std.')
-    parser.add_argument(
-        '--gpu-id', type=str, help='GPU(s) to use.')
-    parser.add_argument(
-        '--debug', action='store_true', help='Debug mode.')
+    parser.add_argument('--mutation-std', type=float, default=0.1, help='Mutation std for NEAT.')
+    parser.add_argument('--gpu-id', type=str, help='GPU(s) to use.')
+    parser.add_argument('--debug', action='store_true', help='Debug mode.')
     config, _ = parser.parse_known_args()
     return config
 
@@ -88,17 +84,18 @@ def main(config):
     max_steps = 3000
     train_task = SlimeVolley(test=False, max_steps=max_steps)
     test_task = SlimeVolley(test=True, max_steps=max_steps)
-    policy = NEATCompatibleMLPPolicy(
+    policy = MLPPolicy(
         input_dim=train_task.obs_shape[0],
-        hidden_dims=[config.hidden_size, ],
+        hidden_dims=[config.hidden_size, config.hidden_size],
         output_dim=train_task.act_shape[0],
-        activation='tanh',
-        output_activation='tanh',
+        output_act_fn='tanh',
     )
-    solver = CMA(
+    solver = NEAT(
         pop_size=config.pop_size,
         param_size=policy.num_params,
         init_stdev=config.init_std,
+        mutation_rate=config.mutation_rate,
+        mutation_std=config.mutation_std,
         seed=config.seed,
         logger=logger,
     )
