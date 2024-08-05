@@ -44,8 +44,9 @@ import jax
 from evojax.task.slimevolley import SlimeVolley
 from evojax.policy.mlp import MLPPolicy
 from evojax.algo import CMA
-from evojax import Trainer
+from evojax.trainer import NEATTrainer
 from evojax import util
+
 
 
 def parse_args():
@@ -59,7 +60,7 @@ def parse_args():
     parser.add_argument(
         '--n-repeats', type=int, default=16, help='Training repetitions.')
     parser.add_argument(
-        '--max-iter', type=int, default=10, help='Max training iterations.')
+        '--max-iter', type=int, default=30, help='Max training iterations.')
     parser.add_argument(
         '--test-interval', type=int, default=50, help='Test interval.')
     parser.add_argument(
@@ -102,7 +103,7 @@ def main(config):
         logger=logger,
     )
     # Train.
-    trainer = Trainer(
+    trainer = NEATTrainer(
         policy=policy,
         solver=solver,
         train_task=train_task,

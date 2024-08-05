@@ -54,20 +54,32 @@ from evojax import util
 
 
 def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--pop-size', type=int, default=128, help='Population size.')
-    parser.add_argument('--hidden-size', type=int, default=20, help='Policy hidden size.')
-    parser.add_argument('--num-tests', type=int, default=100, help='Number of test rollouts.')
-    parser.add_argument('--n-repeats', type=int, default=16, help='Training repetitions.')
-    parser.add_argument('--max-iter', type=int, default=1000, help='Max training iterations.')
-    parser.add_argument('--test-interval', type=int, default=50, help='Test interval.')
-    parser.add_argument('--log-interval', type=int, default=10, help='Logging interval.')
-    parser.add_argument('--seed', type=int, default=42, help='Random seed for training.')
-    parser.add_argument('--init-std', type=float, default=0.1, help='Initial std.')
-    parser.add_argument('--mutation-rate', type=float, default=0.05, help='Mutation rate for NEAT.')
-    parser.add_argument('--mutation-std', type=float, default=0.1, help='Mutation std for NEAT.')
-    parser.add_argument('--gpu-id', type=str, help='GPU(s) to use.')
-    parser.add_argument('--debug', action='store_true', help='Debug mode.')
+    parser = argparse.ArgumentParser(description='Train SlimeVolley using NEAT')
+
+    # General training parameters
+    parser.add_argument('--pop-size', type=int, default=150, help='Population size for NEAT')
+    parser.add_argument('--max-iter', type=int, default=1000, help='Maximum number of iterations/generations')
+    parser.add_argument('--num-tests', type=int, default=100, help='Number of test rollouts for evaluation')
+    parser.add_argument('--n-repeats', type=int, default=16, help='Number of training repetitions')
+    parser.add_argument('--test-interval', type=int, default=50, help='Interval between tests during training')
+    parser.add_argument('--log-interval', type=int, default=10, help='Interval between logging during training')
+    parser.add_argument('--seed', type=int, default=42, help='Random seed for reproducibility')
+
+    # NEAT specific parameters
+    parser.add_argument('--mutation-rate', type=float, default=0.05, help='Mutation rate for NEAT')
+    parser.add_argument('--mutation-std', type=float, default=0.1,
+                        help='Standard deviation for weight mutations in NEAT')
+    parser.add_argument('--species-threshold', type=float, default=3.0, help='Threshold for speciation in NEAT')
+    parser.add_argument('--survival-threshold', type=float, default=0.2, help='Survival threshold for species in NEAT')
+
+    # Environment and policy parameters
+    parser.add_argument('--hidden-size', type=int, default=20, help='Size of hidden layers in the neural network')
+    parser.add_argument('--max-steps', type=int, default=3000, help='Maximum number of steps per episode')
+
+    # Execution parameters
+    parser.add_argument('--gpu-id', type=str, help='GPU(s) to use')
+    parser.add_argument('--debug', action='store_true', help='Enable debug mode')
+
     config, _ = parser.parse_known_args()
     return config
 
@@ -93,9 +105,10 @@ def main(config):
     solver = NEAT(
         pop_size=config.pop_size,
         param_size=policy.num_params,
-        init_stdev=config.init_std,
         mutation_rate=config.mutation_rate,
         mutation_std=config.mutation_std,
+        species_threshold=config.species_threshold,
+        survival_threshold=config.survival_threshold,
         seed=config.seed,
         logger=logger,
     )

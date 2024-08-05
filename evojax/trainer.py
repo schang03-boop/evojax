@@ -221,3 +221,11 @@ class Trainer(object):
                 'Training done, best_score={0:.4f}'.format(best_score))
 
             return best_score
+
+
+class NEATTrainer(Trainer):
+    def train_step(self):
+        params = self.solver.ask()
+        fitness = self.eval_params(params)
+        self.solver.tell(fitness)
+        return jnp.max(fitness)

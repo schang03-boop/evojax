@@ -278,3 +278,27 @@ SlimeVolley: 2024-07-05 22:33:35,621 [INFO] EvoJAX SlimeVolley
 SlimeVolley: 2024-07-05 22:33:35,621 [INFO] ==============================
 SlimeVolley: 2024-07-05 22:33:36,438 [INFO] use_for_loop=False
 SlimeVolley: 2024-07-05 22:33:36,446 [INFO] Start to train for 500 iterations.
+SlimeVolley: 2024-08-05 18:47:21,193 [INFO] EvoJAX SlimeVolley
+SlimeVolley: 2024-08-05 18:47:21,193 [INFO] ==============================
+SlimeVolley: 2024-08-05 18:48:38,192 [INFO] EvoJAX SlimeVolley
+SlimeVolley: 2024-08-05 18:48:38,192 [INFO] ==============================
+SlimeVolley: 2024-08-05 18:49:10,034 [INFO] EvoJAX SlimeVolley
+SlimeVolley: 2024-08-05 18:49:10,034 [INFO] ==============================
+SlimeVolley: 2024-08-05 18:50:07,081 [INFO] EvoJAX SlimeVolley
+SlimeVolley: 2024-08-05 18:50:07,081 [INFO] ==============================
+SlimeVolley: 2024-08-05 18:53:48,397 [INFO] EvoJAX SlimeVolley
+SlimeVolley: 2024-08-05 18:53:48,397 [INFO] ==============================
+SlimeVolley: 2024-08-05 18:53:50,974 [INFO] use_for_loop=False
+SlimeVolley: 2024-08-05 18:53:50,982 [INFO] Start to train for 10 iterations.
+SlimeVolley: 2024-08-05 18:54:48,121 [INFO] [TEST] Iter=10, #tests=100, max=-4.0000, avg=-4.8900, min=-5.0000, std=0.3129
+SlimeVolley: 2024-08-05 18:54:48,130 [INFO] Training done, best_score=-4.8900
+SlimeVolley: 2024-08-05 18:54:48,133 [INFO] Loaded model parameters from ./log/slimevolley.
+SlimeVolley: 2024-08-05 18:54:48,133 [INFO] Start to test the parameters.
+SlimeVolley: 2024-08-05 18:54:48,325 [INFO] [TEST] #tests=100, max=-3.0000, avg=-4.7300, min=-5.0000, std=0.5071
+SlimeVolley: 2024-08-05 18:55:05,964 [INFO] GIF saved to ./log/slimevolley/slimevolley.gif.
+SlimeVolley: 2024-08-05 18:55:30,044 [INFO] EvoJAX SlimeVolley
+SlimeVolley: 2024-08-05 18:55:30,044 [INFO] ==============================
+SlimeVolley: 2024-08-05 18:55:30,827 [INFO] use_for_loop=False
+SlimeVolley: 2024-08-05 18:55:30,835 [INFO] Start to train for 30 iterations.
+SlimeVolley: 2024-08-05 18:56:32,082 [INFO] Iter=10, size=128, max=-27.6875, avg=-32.0161, min=-37.3750, std=1.8466
+SlimeVolley: 2024-08-05 18:57:26,802 [INFO] Iter=20, size=128, max=-22.1250, avg=-31.0859, min=-36.5625, std=2.1711

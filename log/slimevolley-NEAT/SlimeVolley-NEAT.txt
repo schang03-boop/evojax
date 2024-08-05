@@ -1,0 +1,8 @@
+SlimeVolley-NEAT: 2024-08-05 19:13:19,645 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-05 19:13:19,645 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-05 19:18:09,311 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-05 19:18:09,311 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-05 19:19:47,916 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-05 19:19:47,916 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-05 19:19:48,284 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-05 19:19:48,290 [INFO] Start to train for 1000 iterations.
