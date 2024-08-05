@@ -44,7 +44,7 @@ import jax
 from evojax.task.slimevolley import SlimeVolley
 from evojax.policy.mlp import MLPPolicy
 from evojax.algo import CMA
-from evojax.trainer import NEATTrainer
+from evojax import Trainer
 from evojax import util
 
 
@@ -103,7 +103,7 @@ def main(config):
         logger=logger,
     )
     # Train.
-    trainer = NEATTrainer(
+    trainer = Trainer(
         policy=policy,
         solver=solver,
         train_task=train_task,

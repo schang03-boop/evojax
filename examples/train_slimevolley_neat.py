@@ -46,10 +46,10 @@ import jax
 import jax.numpy as jnp
 from jax import random
 
+from evojax.policy.mlp_neat import NEATCompatibleMLPPolicy
 from evojax.task.slimevolley import SlimeVolley
-from evojax.policy.mlp import MLPPolicy
 from evojax.algo.neat import NEAT
-from evojax import Trainer
+from evojax.trainer import NEATTrainer
 from evojax import util
 
 
@@ -96,11 +96,13 @@ def main(config):
     max_steps = 3000
     train_task = SlimeVolley(test=False, max_steps=max_steps)
     test_task = SlimeVolley(test=True, max_steps=max_steps)
-    policy = MLPPolicy(
+    policy = NEATCompatibleMLPPolicy(
         input_dim=train_task.obs_shape[0],
         hidden_dims=[config.hidden_size, config.hidden_size],
         output_dim=train_task.act_shape[0],
-        output_act_fn='tanh',
+        activation='tanh',
+        output_activation='tanh',
+        logger=logger,
     )
     solver = NEAT(
         pop_size=config.pop_size,
@@ -113,7 +115,7 @@ def main(config):
         logger=logger,
     )
     # Train.
-    trainer = Trainer(
+    trainer = NEATTrainer(
         policy=policy,
         solver=solver,
         train_task=train_task,

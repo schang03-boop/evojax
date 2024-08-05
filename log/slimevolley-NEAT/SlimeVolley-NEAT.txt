@@ -6,3 +6,39 @@ SlimeVolley-NEAT: 2024-08-05 19:19:47,916 [INFO] EvoJAX SlimeVolley -- NEAT
 SlimeVolley-NEAT: 2024-08-05 19:19:47,916 [INFO] ==============================
 SlimeVolley-NEAT: 2024-08-05 19:19:48,284 [INFO] use_for_loop=False
 SlimeVolley-NEAT: 2024-08-05 19:19:48,290 [INFO] Start to train for 1000 iterations.
+SlimeVolley-NEAT: 2024-08-05 20:00:41,055 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-05 20:00:41,056 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-05 20:00:41,421 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-05 20:00:41,427 [INFO] Start to train for 1000 iterations.
+SlimeVolley-NEAT: 2024-08-05 20:01:49,627 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-05 20:01:49,627 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-05 20:01:50,006 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-05 20:01:50,012 [INFO] Start to train for 1000 iterations.
+SlimeVolley-NEAT: 2024-08-05 20:17:48,080 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-05 20:17:48,080 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-05 20:17:48,448 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-05 20:17:48,454 [INFO] Start to train for 1000 iterations.
+SlimeVolley-NEAT: 2024-08-05 20:18:58,017 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-05 20:18:58,017 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-05 20:18:58,394 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-05 20:18:58,400 [INFO] Start to train for 1000 iterations.
+SlimeVolley-NEAT: 2024-08-06 01:38:51,203 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-06 01:38:51,203 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-06 01:38:51,576 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-06 01:38:51,582 [INFO] Start to train for 1000 iterations.
+SlimeVolley-NEAT: 2024-08-06 01:41:09,811 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-06 01:41:09,811 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-06 01:41:10,184 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-06 01:41:10,191 [INFO] Start to train for 1000 iterations.
+SlimeVolley-NEAT: 2024-08-06 01:46:10,603 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-06 01:46:10,604 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-06 01:46:10,985 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-06 01:47:38,416 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-06 01:47:38,416 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-06 01:49:10,350 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-06 01:49:10,350 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-06 01:49:10,727 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-06 01:49:39,657 [INFO] EvoJAX SlimeVolley -- NEAT
+SlimeVolley-NEAT: 2024-08-06 01:49:39,657 [INFO] ==============================
+SlimeVolley-NEAT: 2024-08-06 01:49:40,027 [INFO] use_for_loop=False
+SlimeVolley-NEAT: 2024-08-06 01:49:40,033 [INFO] Start to train for 1000 iterations.

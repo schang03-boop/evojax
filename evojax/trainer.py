@@ -14,10 +14,9 @@
 
 import logging
 import time
-from typing import Optional, Callable
+from typing import Optional, Callable, Tuple, List
 
 import jax.numpy as jnp
-import numpy as np
 
 from evojax.task.base import VectorizedTask
 from evojax.policy import PolicyNetwork
@@ -125,7 +124,7 @@ class Trainer(object):
             if params is None:
                 raise ValueError('No policy parameters to evaluate.')
             self._logger.info('Start to test the parameters.')
-            scores = np.array(
+            scores = jnp.array(
                 self.sim_mgr.eval_params(params=params, test=True)[0])
             self._logger.info(
                 '[TEST] #tests={0}, max={1:.4f}, avg={2:.4f}, min={3:.4f}, '
@@ -162,7 +161,7 @@ class Trainer(object):
                     time.perf_counter() - start_time))
 
                 if i > 0 and i % self._log_interval == 0:
-                    scores = np.array(scores)
+                    scores = jnp.array(scores)
                     self._logger.info(
                         'Iter={0}, size={1}, max={2:.4f}, '
                         'avg={3:.4f}, min={4:.4f}, std={5:.4f}'.format(
@@ -224,8 +223,26 @@ class Trainer(object):
 
 
 class NEATTrainer(Trainer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Any NEAT-specific initialization can go here
+
     def train_step(self):
-        params = self.solver.ask()
-        fitness = self.eval_params(params)
-        self.solver.tell(fitness)
-        return jnp.max(fitness)
+        params_list = self.solver.ask()
+        fitness_list = self.eval_params(params_list)
+        self.solver.tell(fitness_list)
+        return jnp.max(fitness_list)
+
+    def eval_params(self, params_list: List[jnp.ndarray]) -> jnp.ndarray:
+        # Evaluate each genome individually using SimManager
+        all_scores = []
+        for params in params_list:
+            # Wrap individual params in a list for SimManager
+            scores, _ = self.sim_mgr.eval_params([params], test=False)
+            all_scores.append(jnp.mean(scores))  # Take mean if multiple repeats
+        return jnp.array(all_scores)
+
+    def run(self, demo_mode: bool = False) -> Tuple[float, float]:
+        # This method is likely implemented in the parent Trainer class
+        # If you need to modify its behavior for NEAT, you can override it here
+        return super().run(demo_mode)
