@@ -335,8 +335,8 @@ class Particle:
         self.c = c
 
     def display(self, canvas):
-        return circle(canvas, toX(float(self.p.x)), toY(float(self.p.y)),
-                      toP(float(self.p.r)), color=self.c)
+        return circle(canvas, toX(Game.array_to_float(self.p.x)), toY(Game.array_to_float(self.p.y)),
+                      toP(Game.array_to_float(self.p.r)), color=self.c)
 
     def move(self):
         self.p = ParticleState(self.p.x+self.p.vx*TIMESTEP,
@@ -594,10 +594,10 @@ class Agent:
         bx = float(ball_x)
         by = float(ball_y)
         p = self.p
-        x = float(p.x)
-        y = float(p.y)
-        r = float(p.r)
-        direction = int(p.direction)
+        x = Game.array_to_float(p.x)
+        y = Game.array_to_float(p.y)
+        r = Game.array_to_float(p.r)
+        direction = int(Game.array_to_float(p.direction))
 
         angle = math.pi * 60 / 180
         if direction == 1:
@@ -624,7 +624,7 @@ class Agent:
                         color=(0, 0, 0))
 
         # draw coins (lives) left
-        num_lives = int(p.life)
+        num_lives = int(Game.array_to_float(p.life))
         for i in range(1, num_lives):
             canvas = circle(canvas, toX(direction*(REF_W/2+0.5-i*2.)),
                             WINDOW_HEIGHT-toY(1.5), toP(0.5),
@@ -752,13 +752,31 @@ class Game:
 
         return result
 
+    @staticmethod
+    def array_to_float(x):
+        if isinstance(x, (np.ndarray, jnp.ndarray)):
+            # Check if the array is scalar (0-dimensional)
+            if x.ndim == 0:
+                return float(x)
+            # If it's a 1-D array with one element, return that element as a float
+            elif x.ndim == 1 and len(x) == 1:
+                return float(x[0])
+            else:
+                raise ValueError(f"Cannot convert array of shape {x.shape} to float")
+        if hasattr(x, 'item'):  # This covers JAX arrays
+            return float(x.item())
+        return float(x)
+
     def display(self):
+        dx = self.array_to_float(self.ball.p.x)
+        dy = self.array_to_float(self.ball.p.y)
+
         canvas = create_canvas(c=BACKGROUND_COLOR)
         canvas = self.fence.display(canvas)
         canvas = self.fenceStub.display(canvas)
-        canvas = self.agent_left.display(canvas, self.ball.p.x, self.ball.p.y)
+        canvas = self.agent_left.display(canvas, dx, dy)
         canvas = self.agent_right.display(
-            canvas, self.ball.p.x, self.ball.p.y)
+            canvas, self.array_to_float(self.ball.p.x), self.array_to_float(self.ball.p.y))
         canvas = self.ball.display(canvas)
         canvas = self.ground.display(canvas)
         canvas = downsize_image(canvas)

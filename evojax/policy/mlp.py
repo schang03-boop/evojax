@@ -64,7 +64,10 @@ class MLPPolicy(PolicyNetwork):
 
         model = MLP(
             feat_dims=hidden_dims, out_dim=output_dim, out_fn=output_act_fn)
-        params = model.init(random.PRNGKey(0), jnp.ones([1, input_dim]))
+        rand_key = random.PRNGKey(0)
+        jnp_arr = jnp.ones((1, input_dim))
+
+        params = model.init(rand_key, jnp_arr)
         self.num_params, format_params_fn = get_params_format_fn(params)
         self._logger.info('MLPPolicy.num_params = {}'.format(self.num_params))
         self._format_params_fn = jax.vmap(format_params_fn)

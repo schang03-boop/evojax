@@ -59,7 +59,7 @@ def parse_args():
     parser.add_argument(
         '--n-repeats', type=int, default=16, help='Training repetitions.')
     parser.add_argument(
-        '--max-iter', type=int, default=500, help='Max training iterations.')
+        '--max-iter', type=int, default=10, help='Max training iterations.')
     parser.add_argument(
         '--test-interval', type=int, default=50, help='Test interval.')
     parser.add_argument(
